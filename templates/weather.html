@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather - Krishi Mitra</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f8e9;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .box {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 5px 25px #0001;
+            text-align: center;
+        }
+
+        h1 {
+            color: #1b5e20;
+        }
+
+        .temp {
+            font-size: 45px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .info {
+            margin: 15px 0;
+            font-size: 18px;
+        }
+
+        input {
+            padding: 12px;
+            width: 70%;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 12px 18px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #2e7d32;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h1>🌦️ मौसम की जानकारी</h1>
+
+    <form method="get" action="{{ url_for('weather') }}">
+        <input
+            type="text"
+            name="city"
+            placeholder="शहर का नाम"
+            value="{{ city }}"
+            required
+        >
+        <button type="submit">Search</button>
+    </form>
+
+    {% if weather %}
+
+        <h2>{{ city }}</h2>
+
+        <div class="temp">
+            {{ weather.main.temp }}°C
+        </div>
+
+        <div class="info">
+            🌡️ महसूस हो रहा है: {{ weather.main.feels_like }}°C
+        </div>
+
+        <div class="info">
+            💧 Humidity: {{ weather.main.humidity }}%
+        </div>
+
+        <div class="info">
+            💨 Wind: {{ weather.wind.speed }} m/s
+        </div>
+
+        <div class="info">
+            ☁️ स्थिति: {{ weather.weather[0].description }}
+        </div>
+
+    {% endif %}
+
+    <a href="{{ url_for('dashboard') }}">← Dashboard पर वापस जाएँ</a>
+
+</div>
+
+</body>
+</html>

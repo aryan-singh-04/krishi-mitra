@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Red Zone - Krishi Mitra</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffebee;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .box {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 5px 25px #0001;
+        }
+
+        h1 {
+            color: #b71c1c;
+            text-align: center;
+        }
+
+        .warning {
+            background: #fff5f5;
+            border-left: 6px solid #d32f2f;
+            padding: 18px;
+            margin-top: 18px;
+            border-radius: 10px;
+        }
+
+        .warning h2 {
+            color: #c62828;
+            margin-top: 0;
+        }
+
+        .warning p {
+            font-size: 17px;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #2e7d32;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h1>🚨 Red Zone</h1>
+
+    <p style="text-align:center;">
+        ⚠️ किसान के लिए महत्वपूर्ण चेतावनियाँ
+    </p>
+
+    {% for warning in warnings %}
+
+    <div class="warning">
+
+        <h2>{{ warning.title }}</h2>
+
+        <p>{{ warning.message }}</p>
+
+    </div>
+
+    {% endfor %}
+
+    <a href="{{ url_for('dashboard') }}">
+        ← Dashboard पर वापस जाएँ
+    </a>
+
+</div>
+
+</body>
+</html>

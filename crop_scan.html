@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Crop Scan - Krishi Mitra</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f8e9;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .box {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 5px 25px #0001;
+        }
+
+        h1 {
+            color: #1b5e20;
+            text-align: center;
+        }
+
+        .section {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f9fff5;
+            border-radius: 12px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1b5e20;
+        }
+
+        .location {
+            margin-top: 12px;
+            padding: 12px;
+            background: #e8f5e9;
+            border-radius: 8px;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #2e7d32;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h1>📷 Crop Scan AI</h1>
+
+    <p style="text-align:center;">
+        फसल की फोटो upload करके बीमारी की पहचान करें
+    </p>
+
+    <div class="section">
+
+        <label>📷 फसल की फोटो चुनें</label>
+
+       <form method="POST" action="{{ url_for('crop_scan') }}" enctype="multipart/form-data">
+
+    <label>📷 फसल की फोटो चुनें</label>
+
+    <input
+        type="file"
+        name="crop_image"
+        id="cropImage"
+        accept="image/*"
+        capture="environment"
+        required
+    >
+
+    <button type="submit">
+        📷 Photo Upload करें
+    </button>
+
+</form>
+
+    </div>
+
+    <div class="section">
+
+        <label>📍 आपकी Location</label>
+
+        <button type="button" onclick="getLocation()">
+            📍 Location प्राप्त करें
+        </button>
+
+        <div class="location" id="location">
+            Location अभी नहीं मिली।
+        </div>
+
+    </div>
+
+    <button type="button">
+        🤖 AI से Crop Scan करें
+    </button>
+
+    <a href="{{ url_for('dashboard') }}">
+        ← Dashboard पर वापस जाएँ
+    </a>
+
+</div>
+
+<script>
+function getLocation() {
+
+    const locationBox = document.getElementById("location");
+
+    if (!navigator.geolocation) {
+        locationBox.innerHTML = "❌ आपका browser location support नहीं करता।";
+        return;
+    }
+
+    locationBox.innerHTML = "📍 Location प्राप्त की जा रही है...";
+
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            locationBox.innerHTML =
+                "✅ Location मिल गई<br>" +
+                "Latitude: " + latitude.toFixed(6) + "<br>" +
+                "Longitude: " + longitude.toFixed(6);
+
+        },
+
+        function(error) {
+
+            locationBox.innerHTML =
+                "❌ Location permission नहीं मिली। Browser में Allow करें।";
+
+        }
+    );
+}
+</script>
+
+</body>
+</html>

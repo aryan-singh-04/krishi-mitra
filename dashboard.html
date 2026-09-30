@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Krishi Mitra</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f8e9;
+            color: #263238;
+            margin: 0;
+        }
+
+        .nav {
+            background: #2e7d32;
+            color: white;
+            padding: 18px 25px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .wrap {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 18px;
+        }
+
+        .welcome {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 12px #0001;
+            text-decoration: none;
+            color: #263238;
+            display: block;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        .icon {
+            font-size: 35px;
+        }
+
+        h1 {
+            color: #1b5e20;
+        }
+
+        h2 {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="nav">
+        <strong>🌾 Krishi Mitra</strong>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+
+    <div class="wrap">
+
+        <div class="welcome">
+            <h1>नमस्ते किसान 👋</h1>
+            <p>{{ user.get('email', 'User') }}</p>
+        </div>
+
+        <div class="grid">
+
+            <a href="{{ url_for('weather') }}" class="card">
+                <div class="icon">🌦️</div>
+                <h2>Weather</h2>
+                <p>मौसम की जानकारी यहाँ आएगी।</p>
+            </a>
+
+            <a href="{{ url_for('crop') }}" class="card">
+    <div class="icon">🌱</div>
+    <h2>Crop</h2>
+    <p>फसल की जानकारी यहाँ आएगी।</p>
+</a>
+
+            <a href="{{ url_for('hisaab') }}" class="card">
+                <div class="icon">💰</div>
+                <h2>Hisaab</h2>
+                <p>खर्च और कमाई का हिसाब यहाँ आएगा।</p>
+            </a>
+            <a href="/crop-scan"
+   class="card"
+   style="cursor: pointer;">
+
+    <div class="icon">📷</div>
+
+    <h2>Crop Scan AI</h2>
+
+    <p>फसल की फोटो से बीमारी की पहचान करें।</p>
+
+</a>
+
+            <a href="{{ url_for('red_zone') }}" class="card">
+                <div class="icon">🔴</div>
+                <h2>Red Zone</h2>
+                <p>फसल की warning यहाँ आएगी।</p>
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

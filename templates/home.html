@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishi Mitra</title>
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0} body{font-family:Arial,sans-serif;background:#f1f8e9;color:#263238}.navbar{background:#2e7d32;color:#fff;padding:18px 30px;display:flex;justify-content:space-between;align-items:center}.logo{font-size:24px;font-weight:bold}.btn{display:inline-block;text-decoration:none;border:0;border-radius:9px;padding:11px 18px;font-weight:bold;cursor:pointer}.login{background:#fff;color:#2e7d32}.logout{background:#ffebee;color:#b71c1c}.hero{min-height:80vh;display:flex;justify-content:center;align-items:center;text-align:center;padding:30px}.hero-content{max-width:760px}.hero h1{font-size:55px;color:#1b5e20;margin-bottom:15px}.hero h2{font-size:28px;margin-bottom:15px}.hero p{font-size:18px;color:#546e7a;margin-bottom:30px;line-height:1.6}.start{background:#43a047;color:#fff}.features{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin-top:35px}.feature{background:#fff;padding:18px;border-radius:12px;width:150px;box-shadow:0 3px 10px rgba(0,0,0,.08)}.feature span{font-size:30px}.feature p{margin-top:8px;margin-bottom:0;font-size:15px;color:#263238}@media(max-width:600px){.hero h1{font-size:40px}.hero h2{font-size:22px}.hero p{font-size:16px}.feature{width:130px}}
+    </style>
+</head>
+<body>
+<nav class="navbar"><div class="logo">🌾 Krishi Mitra</div>{% if logged_in %}<a class="btn logout" href="{{ url_for('logout') }}">Logout</a>{% else %}<a class="btn login" href="{{ url_for('login') }}">Login</a>{% endif %}</nav>
+<main class="hero"><div class="hero-content"><h1>🌾 Krishi Mitra</h1><h2>आपका खेती का डिजिटल साथी</h2><p>मौसम, फसल, खेती का हिसाब, बीमारी की जानकारी और किसान समुदाय — सब एक ही जगह।</p><a class="btn start" href="{{ url_for('dashboard') if logged_in else url_for('signup') }}">{{ 'Dashboard खोलें' if logged_in else 'शुरुआत करें' }}</a><div class="features"><div class="feature"><span>🌦️</span><p>Weather</p></div><div class="feature"><span>🌱</span><p>Crop</p></div><div class="feature"><span>💰</span><p>Hisaab</p></div><div class="feature"><span>🔴</span><p>Red Zone</p></div></div></div></main>
+</body>
+</html>
